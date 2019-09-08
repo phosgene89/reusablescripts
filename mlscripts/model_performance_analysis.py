@@ -7,15 +7,21 @@ y_classes = y_prob
 y_classes[y_classes<0.5]=0
 y_classes[y_classes!=0]=1
 
-cm1 = confusion_matrix(y_test, y_classes)
+cm1 = confusion_matrix(y_test[:,1], y_classes)
 print("Confusion matrix:")
 print(cm1)
 
-sensitivity1 = cm1[0,0]/(cm1[0,0]+cm1[0,1])
-print('Sensitivity : ', sensitivity1 )
+specificity1 = cm1[0,0]/(cm1[0,0]+cm1[0,1])
+print('Specificity: ', specificity1)
 
-specificity1 = cm1[1,1]/(cm1[1,0]+cm1[1,1])
-print('Specificity : ', specificity1)
+sensitivity1 = cm1[1,1]/(cm1[1,0]+cm1[1,1])
+print('Sensitivity: ', sensitivity1 )
+
+precision1 = cm1[1,1]/(cm1[0,1]+cm1[1,1])
+print('Precision: ', precision1)
+
+acc = np.mean(y_classes==y_test[:,1])
+print('Accuracy: ', acc)
 
 # ROC curve and AUC
 scores = y_prob
